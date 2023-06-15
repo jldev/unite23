@@ -21,23 +21,21 @@ void setup() {
 }
 
 void loop() {
-    int speed1, speed2 = 0;
+    int speed = 0;
 
     if (huskylens.available()){
       while (huskylens.available())
       {
           HUSKYLENSResult result = huskylens.read();
-          printResult(result);
+          // printResult(result);
           if (result.command == COMMAND_RETURN_BLOCK){
               //our speed will be based on the size of the object, smaller i.e. further away we go faster
               if (result.width > 100) { //we are pretty close
-                speed1 = speed2 = 0;
+                speed = 0;
               } else if (result.width > 50){
-                speed1 = 150;
-                speed2 = 75;
+                speed = 150;
               } else {
-                speed1 = 200;
-                speed2 = 100;
+                speed = 200;
               }
               //x will go from 0 far left to 320 far right
               // let's segment the screen into 3 parts
@@ -45,11 +43,11 @@ void loop() {
               // 80 - 240 go straight
               // 240 - 320 we need to turn left
               if (result.xCenter < 80){
-                robot.go_smooth(Direction::RIGHT, speed2, speed1);
+                robot.go(Direction::RIGHT, speed);
               } else if(result.xCenter >= 80 && result.xCenter <=240){
-                robot.go_smooth(Direction::FORWARD, speed1, speed1);
+                robot.go(Direction::FORWARD, speed);
               } else {
-                robot.go_smooth(Direction::LEFT, speed1, speed2);
+                robot.go(Direction::LEFT, speed);
               }
           }
       } 

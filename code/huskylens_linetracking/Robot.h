@@ -30,8 +30,6 @@ private:
 public:
   Robot (uint8_t left_dir_pin, uint8_t left_pwm, uint8_t right_dir_pin, uint8_t right_pwm);
   void go(Direction dir, uint8_t speed);
-  void go_smooth(Direction dir, uint8_t left_speed, uint8_t right_speed);
-  void set_direction(Direction dir);
   void stop();
 
 };
