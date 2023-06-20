@@ -23,8 +23,8 @@ void setup() {
 }
 
 void loop() {
-  ctrlCar(FORWARD, 100);
-  delay(8000);
+  //add code here to control the robot, user the ctrlCar method below
+  //example ctrlCar(LEFT, 150)
 }
 
 
