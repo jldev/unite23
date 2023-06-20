@@ -52,6 +52,10 @@ The workshop is 4-5 days roughly 3 hours each day.  The rough plan is below
 
 
 # HuskyLens Library Install
+Sketch->Include Library->Add Zip then select the zip from libraries/HUSKKEYLENSArduino-master/HUSKYLENS.zip
+
+or
+
 Copy the HUSKYLENS folder from libraries/HUSKKEYLENSArduino-master to the library folder for Arduino, For me on Windows it is located at C:\Users\USERNAME\AppData\Local\Arduino15\libraries
     
 

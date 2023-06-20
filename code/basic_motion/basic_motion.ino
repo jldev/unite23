@@ -10,7 +10,7 @@ const int pwmBPin = 5;    // define pin for PWM used to control rotational speed
 #define BACKWARD 2
 #define LEFT 3
 #define RIGHT 4
-#define STOP 4
+#define STOP 5
 
 void setup() {
   // put your setup code here, to run once:
@@ -23,18 +23,18 @@ void setup() {
 }
 
 void loop() {
-  
-  //Students will add code here to make the robot move 
-
-  // example 
-  // ctrlCar(LEFT, 150);
-  // delay(1000);
-
+  ctrlCar(FORWARD, 100);
+  delay(8000);
 }
 
 
 //Control motor motion direction and speed function
 void ctrlCar( int motorDir, byte motorSpd) {
+  //motorSpd must be at least 100, motors work down to 3V, 8V battery * 100/255 ~ 3.1V 
+  if (motorSpd < 100){
+    motorSpd = 100;
+  }
+
   switch(motorDir){
     case FORWARD:
       digitalWrite(dirAPin, HIGH);
