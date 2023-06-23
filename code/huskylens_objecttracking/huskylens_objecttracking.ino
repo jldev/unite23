@@ -22,16 +22,17 @@ void setup() {
 
 void loop() {
     int speed = 0;
+    static int sweep_right = 0;
 
     if (huskylens.available()){
       while (huskylens.available())
       {
           HUSKYLENSResult result = huskylens.read();
-          // printResult(result);
+          //printResult(result);
           if (result.command == COMMAND_RETURN_BLOCK){
               //our speed will be based on the size of the object, smaller i.e. further away we go faster
               if (result.width > 100) { //we are pretty close
-                speed = 0;
+                speed = 100;
               } else if (result.width > 50){
                 speed = 150;
               } else {
@@ -43,16 +44,16 @@ void loop() {
               // 80 - 240 go straight
               // 240 - 320 we need to turn left
               if (result.xCenter < 80){
-                robot.go(Direction::RIGHT, speed);
+                robot.go(Direction::RIGHT, speed, 100);
               } else if(result.xCenter >= 80 && result.xCenter <=240){
-                robot.go(Direction::FORWARD, speed);
+                robot.go(Direction::FORWARD, speed, 250);
               } else {
-                robot.go(Direction::LEFT, speed);
+                robot.go(Direction::LEFT, speed, 100);
               }
+              delay(10);
           }
       } 
-    } else {
-      robot.stop();
+    } else {                                                                                                                                                                                                                   
       if (!huskylens.request()) Serial.println(F("Fail to request data from HUSKYLENS, recheck the connection!"));
       else if(!huskylens.isLearned()) Serial.println(F("Nothing learned, press learn button on HUSKYLENS to learn one!"));
       else if(!huskylens.available()) Serial.println(F("No block or arrow appears on the screen!"));

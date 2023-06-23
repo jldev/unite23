@@ -29,7 +29,7 @@ private:
 
 public:
   Robot (uint8_t left_dir_pin, uint8_t left_pwm, uint8_t right_dir_pin, uint8_t right_pwm);
-  void go(Direction dir, uint8_t speed);
+  void go(Direction dir, uint8_t speed, uint16_t t);
   void stop();
 
 };

@@ -18,8 +18,9 @@ Robot::Robot (uint8_t left_dir_pin, uint8_t left_pwm, uint8_t right_dir_pin, uin
   pinMode (_right_pwm, OUTPUT);
 }
 
-
-void Robot::go(Direction dir, uint8_t speed){
+void Robot::go(Direction dir, uint8_t speed, uint16_t t){
+  uint8_t left_speed = speed;
+  uint8_t right_speed = speed;
   switch(dir){
     case Direction::FORWARD:
       digitalWrite(_left_dir_pin, HIGH);
@@ -29,11 +30,13 @@ void Robot::go(Direction dir, uint8_t speed){
       digitalWrite(_left_dir_pin, LOW);
       digitalWrite(_right_dir_pin, HIGH);
       break;
-    case Direction::LEFT:
+    case Direction::RIGHT:
+      right_speed -= 50;
       digitalWrite(_left_dir_pin, HIGH);
       digitalWrite(_right_dir_pin, HIGH);
       break;
-    case Direction::RIGHT:
+    case Direction::LEFT:
+      left_speed -= 50;
       digitalWrite(_left_dir_pin, LOW);
       digitalWrite(_right_dir_pin, LOW);
       break; 
@@ -45,8 +48,10 @@ void Robot::go(Direction dir, uint8_t speed){
       digitalWrite(_right_dir_pin, LOW);
       break;     
   }
-  analogWrite(_left_pwm, speed);
-  analogWrite(_right_pwm, speed);
+  analogWrite(_left_pwm, left_speed);
+  analogWrite(_right_pwm, right_speed);
+  delay(t);
+  this->stop();
 }
 
 void Robot::stop(void){
