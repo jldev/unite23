@@ -28,29 +28,13 @@ void loop() {
       while (huskylens.available())
       {
           HUSKYLENSResult result = huskylens.read();
-          //printResult(result);
+          printResult(result);
           if (result.command == COMMAND_RETURN_BLOCK){
-              //our speed will be based on the size of the object, smaller i.e. further away we go faster
-              if (result.width > 100) { //we are pretty close
-                speed = 100;
-              } else if (result.width > 50){
-                speed = 150;
-              } else {
-                speed = 200;
-              }
-              //x will go from 0 far left to 320 far right
-              // let's segment the screen into 3 parts
-              // 0 - 80 we need to turn right
-              // 80 - 240 go straight
-              // 240 - 320 we need to turn left
-              if (result.xCenter < 80){
-                robot.go(Direction::RIGHT, speed, 100);
-              } else if(result.xCenter >= 80 && result.xCenter <=240){
-                robot.go(Direction::FORWARD, speed, 250);
-              } else {
-                robot.go(Direction::LEFT, speed, 100);
-              }
-              delay(10);
+
+
+            // We will want to do something here when we find out object
+
+
           }
       } 
     } else {                                                                                                                                                                                                                   
