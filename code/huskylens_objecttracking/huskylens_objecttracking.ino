@@ -31,13 +31,42 @@ void loop() {
           printResult(result);
           if (result.command == COMMAND_RETURN_BLOCK){
 
+            if(result.width > 60){
+              robot.stop();
+            }
 
-            // We will want to do something here when we find out object
+            if ((result.xCenter > 110) && (result.xCenter < 210)){
+              robot.go(Direction::FORWARD, 150, 50);
+
+            }  else if (result.xCenter >= 210 ) {
+              robot.go(Direction::RIGHT, 150, 50);
+
+            } else if (result.xCenter <= 110) {
+              robot.go(Direction::LEFT, 150, 50);
+            }
 
 
-          }
+          //   if (result.width > 50)
+          //   {
+          //     robot.stop();
+          //   } else {
+          //     // We will want to do something here when we find out object
+          //     //we know the screen goes from 0 left to 320 right
+          //     // lefts make a road in pixel coordinates from 100 - 200
+          //     if ((result.xCenter > 100) || (result.xCenter < 200)){
+          //       robot.go(Direction::FORWARD, 150, 100);
+          //     } else if (result.xCenter <= 100){
+          //       //we are too far to the left
+          //       robot.go(Direction::RIGHT, 150, 100, 25);
+          //     } else if (result.xCenter >= 200){
+          //       //we are too far right
+          //       robot.go(Direction::LEFT, 100, 150, 25);
+          //     }
+          //   }
+           }
       } 
-    } else {                                                                                                                                                                                                                   
+    } else {        
+      robot.stop();                                                                                                                                                                                                  
       if (!huskylens.request()) Serial.println(F("Fail to request data from HUSKYLENS, recheck the connection!"));
       else if(!huskylens.isLearned()) Serial.println(F("Nothing learned, press learn button on HUSKYLENS to learn one!"));
       else if(!huskylens.available()) Serial.println(F("No block or arrow appears on the screen!"));
